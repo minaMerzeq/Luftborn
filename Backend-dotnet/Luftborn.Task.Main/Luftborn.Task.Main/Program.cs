@@ -1,4 +1,6 @@
 using Luftborn.Task.Main.Application.Decorators;
+using Luftborn.Task.Main.Application.Services;
+using Luftborn.Task.Main.Application.Strategies;
 using Luftborn.Task.Main.Domain.Interfaces;
 using Luftborn.Task.Main.Infrastructure;
 using Luftborn.Task.Main.Infrastructure.Repos;
@@ -18,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.Decorate(typeof(IRepository<>), typeof(LoggingRepoDecorator<>));
+builder.Services.AddScoped<IDiscountStrategy, BlackFridayDiscountStrategy>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
