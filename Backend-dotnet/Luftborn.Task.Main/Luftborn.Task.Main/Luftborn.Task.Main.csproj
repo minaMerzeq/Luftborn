@@ -13,19 +13,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Scrutor" Version="5.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Application\Mediators\Commands\" />
     <Folder Include="Application\Mediators\CommandHandlers\" />
-    <Folder Include="Application\Decorators\" />
     <Folder Include="Application\Strategies\" />
     <Folder Include="Application\Services\" />
     <Folder Include="Controllers\" />
     <Folder Include="Domain\Dtos\" />
-    <Folder Include="Domain\Interfaces\" />
-    <Folder Include="Infrastructure\Repos\" />
   </ItemGroup>
 
 </Project>

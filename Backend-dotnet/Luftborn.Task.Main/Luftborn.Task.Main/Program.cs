@@ -1,3 +1,4 @@
+using Luftborn.Task.Main.Application.Decorators;
 using Luftborn.Task.Main.Domain.Interfaces;
 using Luftborn.Task.Main.Infrastructure;
 using Luftborn.Task.Main.Infrastructure.Repos;
@@ -16,6 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.Decorate(typeof(IRepository<>), typeof(LoggingRepoDecorator<>));
 
 var app = builder.Build();
 
