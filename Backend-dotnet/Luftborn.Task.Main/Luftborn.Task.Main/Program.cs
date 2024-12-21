@@ -6,7 +6,6 @@ using Luftborn.Task.Main.Infrastructure;
 using Luftborn.Task.Main.Infrastructure.Repos;
 using Luftborn.Task.Main.Middlewares;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

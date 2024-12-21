@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Text.Json;
 
 namespace Luftborn.Task.Main.Middlewares
 {
@@ -8,7 +7,7 @@ namespace Luftborn.Task.Main.Middlewares
         private readonly RequestDelegate _next = next;
         private readonly ILogger<ExceptionMiddleware> _logger = logger;
 
-        public async ValueTask InvokeAsync(HttpContext context)
+        public async System.Threading.Tasks.Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -20,7 +19,7 @@ namespace Luftborn.Task.Main.Middlewares
             }
         }
 
-        private async ValueTask HandleExceptionAsync(HttpContext context, Exception exception)
+        private async System.Threading.Tasks.Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
             var response = context.Response;
