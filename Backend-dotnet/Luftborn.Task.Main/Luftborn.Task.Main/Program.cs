@@ -5,6 +5,7 @@ using Luftborn.Task.Main.Domain.Interfaces;
 using Luftborn.Task.Main.Infrastructure;
 using Luftborn.Task.Main.Infrastructure.Repos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.Decorate(typeof(IRepository<>), typeof(LoggingRepoDecorator<>));
 builder.Services.AddScoped<IDiscountStrategy, BlackFridayDiscountStrategy>();
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 var app = builder.Build();
 
