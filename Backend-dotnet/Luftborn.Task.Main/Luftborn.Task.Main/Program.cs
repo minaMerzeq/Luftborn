@@ -4,6 +4,7 @@ using Luftborn.Task.Main.Application.Strategies;
 using Luftborn.Task.Main.Domain.Interfaces;
 using Luftborn.Task.Main.Infrastructure;
 using Luftborn.Task.Main.Infrastructure.Repos;
+using Luftborn.Task.Main.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +27,14 @@ builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,6 +43,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
