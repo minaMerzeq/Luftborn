@@ -10,7 +10,7 @@ import {
 function App() {
   const [products, setProducts] = useState([]);
   const [editedProduct, setEditedProduct] = useState({
-    id: "",
+    id: 0,
     name: "",
     price: "",
     description: "",
@@ -42,7 +42,7 @@ function App() {
 
     if (isValid)
       setEditedProduct({
-        id: "",
+        id: 0,
         name: "",
         price: "",
         description: "",
